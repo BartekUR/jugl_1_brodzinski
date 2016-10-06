@@ -90,12 +90,14 @@ public class SimpleJOGL implements GLEventListener {
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
         
+        gl.glColor3f(0.0f,1.0f,0.0f);
         gl.glBegin(GL.GL_TRIANGLES);
         gl.glVertex3f(-1.0f, 1.0f, -6.0f);
         gl.glVertex3f(-2.0f,-1.0f, -6.0f);
         gl.glVertex3f( 0.0f,-1.0f, -6.0f);
         gl.glEnd();
         
+        gl.glColor3f(1.0f,0.0f,0.0f);
         gl.glBegin(GL.GL_QUADS);
         gl.glVertex3f( 1.0f,-1.0f, -9.0f);
         gl.glVertex3f( 1.0f, 1.0f, -9.0f);
