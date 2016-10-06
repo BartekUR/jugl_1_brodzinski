@@ -90,19 +90,19 @@ public class SimpleJOGL implements GLEventListener {
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
         
-        circle(gl, 0.0f, 0.0f, -10.0f);
+        circle(gl, 0.0f, 0.0f, -10.0f, 1.0f);
 
         // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
     
-    public void circle(GL gl, float X, float Y, float Z) {
+    public void circle(GL gl, float X, float Y, float Z, float m) {
         float x,y,kat;
         gl.glBegin(GL.GL_TRIANGLE_FAN);
         gl.glVertex3f(X, Y, Z);
         for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
-        x = 1.5f*(float)Math.sin(kat);
-        y = 1.5f*(float)Math.cos(kat);
+        x = m*(float)Math.sin(kat);
+        y = m*(float)Math.cos(kat);
         gl.glVertex3f(x, y, Z);
         }
         gl.glEnd();
