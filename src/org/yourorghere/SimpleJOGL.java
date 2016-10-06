@@ -94,8 +94,8 @@ public class SimpleJOGL implements GLEventListener {
         gl.glBegin(GL.GL_TRIANGLE_FAN);
         gl.glVertex3f(0.0f,0.0f,-7.0f);
         for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
-        x = 1.5f*(float)Math.sin(kat);
-        y = 1.5f*(float)Math.cos(kat);
+        x = 2.0f*(float)Math.sin(kat);
+        y = 2.0f*(float)Math.cos(kat);
         gl.glVertex3f(x, y, -6.0f);
         }
         gl.glEnd();
