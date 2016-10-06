@@ -90,18 +90,22 @@ public class SimpleJOGL implements GLEventListener {
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
         
-        float x,y,kat;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f,0.0f,-7.0f);
-        for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
-        x = 2.0f*(float)Math.sin(kat);
-        y = 2.0f*(float)Math.cos(kat);
-        gl.glVertex3f(x, y, -6.0f);
-        }
-        gl.glEnd();
+        circle(gl, 0.0f, 0.5f, 0.5f);
 
         // Flush all drawing operations to the graphics card
         gl.glFlush();
+    }
+    
+    public void circle(GL gl, float r, float X, float Y) {
+        float x,y,kat;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f,0.0f,-7.0f);
+        for(kat = r; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
+        x = X*(float)Math.sin(kat);
+        y = Y*(float)Math.cos(kat);
+        gl.glVertex3f(x, y, -6.0f);
+        }
+        gl.glEnd();
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
