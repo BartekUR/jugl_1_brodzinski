@@ -83,24 +83,24 @@ public class SimpleJOGL implements GLEventListener {
         // Enable VSync
         gl.setSwapInterval(1);
 
-         //warto?ci sk³adowe o?wietlenia i koordynaty ?ród³a ?wiat³a
+         //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
         float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
-        float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat³o rozproszone
-        float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //?wiat³o odbite
-        float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja ?wiat³a
-        //(czwarty parametr okre?la odleg³o?æ ?ród³a:
-        //0.0f-nieskoñczona; 1.0f-okre?lona przez pozosta³e parametry)
-        gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
+        float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
+        float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
+        float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
+        //(czwarty parametr okreœla odleg³oœæ œród³a:
+        //0.0f-nieskoñczona; 1.0f-okreœlona przez pozosta³e parametry)
+        gl.glEnable(GL.GL_LIGHTING); //uaktywnienie oœwietlenia
         //ustawienie parametrów ?ród³a ?wiat³a nr. 0
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat³o otaczajšce
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //?wiat³o rozproszone
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat³o odbite
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //œwiat³o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //œwiat³o odbite
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
-        gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
-        gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
-        //kolory bêdš ustalane za pomocš glColor
+        gl.glEnable(GL.GL_LIGHT0); //uaktywnienie Ÿród³a œwiat³a nr. 0
+        gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie œledzenia kolorów
+        //kolory bêd¹ ustalane za pomoc¹ glColor
         gl.glColorMaterial(GL.GL_FRONT, GL.GL_AMBIENT_AND_DIFFUSE);
-        //Ustawienie jasno?ci i odblaskowo?ci obiektów
+        //Ustawienie jasnoœci i odblaskowo?ci obiektów
         float specref[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //parametry odblaskowo?ci
         gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR,specref,0);
         
@@ -150,43 +150,39 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
 
-        gl.glBegin(GL.GL_QUADS);
-            //œciana przednia
+        gl.glBegin(GL.GL_TRIANGLES);
+            //œciana 1
             gl.glColor3f(1.0f,0.0f,0.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
             gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
-            //sciana tylnia
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+
+            //sciana 2
             gl.glColor3f(0.0f,1.0f,0.0f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
             gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            //œciana lewa
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+
+            //œciana 3
             gl.glColor3f(0.0f,0.0f,1.0f);
             gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            //œciana prawa
-            gl.glColor3f(1.0f,1.0f,0.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
             gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+
+            //œciana 4
+            gl.glColor3f(1.0f,1.0f,0.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+        gl.glEnd();
+            
+        gl.glBegin(GL.GL_QUADS);
             //œciana dolna
             gl.glColor3f(1.0f,0.0f,1.0f);
             gl.glVertex3f(-1.0f,-1.0f,1.0f);
             gl.glVertex3f(-1.0f,-1.0f,-1.0f);
             gl.glVertex3f(1.0f,-1.0f,-1.0f);
             gl.glVertex3f(1.0f,-1.0f,1.0f);
-            //œciana górna
-            gl.glColor3f(0.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
         gl.glEnd();
         
         // circle(gl, 0.0f, 0.0f, -10.0f, 1.0f);
