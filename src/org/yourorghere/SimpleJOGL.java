@@ -152,10 +152,11 @@ public class SimpleJOGL implements GLEventListener {
 
         gl.glColor3f(0.0f,1.0f,0.0f);
         circle(gl,  2.0f, 2.0f);
-        circle(gl, -2.0f, 2.0f);
         
         gl.glColor3f(1.0f,0.0f,0.0f);
-        walec(gl, 2.0f, 2.0f, -2.0f);
+        stozek(gl, 2.0f, 2.0f);
+        
+        //walec(gl, 2.0f, 2.0f, -2.0f);
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
@@ -184,6 +185,18 @@ public class SimpleJOGL implements GLEventListener {
                 y = m*(float)Math.cos(kat);
                 gl.glVertex3f(x, y, a);
                 gl.glVertex3f(x, y, b);
+            }
+        gl.glEnd();
+    }
+    
+    public void stozek(GL gl, float m, float a) {
+        float x, y;
+        gl.glBegin(GL.GL_QUAD_STRIP);
+            for(float kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {                
+                x = m*(float)Math.sin(kat);
+                y = m*(float)Math.cos(kat);
+                gl.glVertex3f(x, y, a);
+                gl.glVertex3f(0.0f, 1.0f, 0.0f);
             }
         gl.glEnd();
     }
