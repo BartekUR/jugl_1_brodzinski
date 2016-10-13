@@ -150,59 +150,44 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
 
-        gl.glBegin(GL.GL_TRIANGLES);
-            //œciana 1
-            gl.glColor3f(1.0f,0.0f,0.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-
-            //sciana 2
-            gl.glColor3f(0.0f,1.0f,0.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-
-            //œciana 3
-            gl.glColor3f(0.0f,0.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-
-            //œciana 4
-            gl.glColor3f(1.0f,1.0f,0.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-        gl.glEnd();
-            
-        gl.glBegin(GL.GL_QUADS);
-            //œciana dolna
-            gl.glColor3f(1.0f,0.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-        gl.glEnd();
+        gl.glColor3f(0.0f,1.0f,0.0f);
+        circle(gl,  2.0f, 2.0f);
+        circle(gl, -2.0f, 2.0f);
         
-        // circle(gl, 0.0f, 0.0f, -10.0f, 1.0f);
-
+        gl.glColor3f(1.0f,0.0f,0.0f);
+        walec(gl, 2.0f, 2.0f, -2.0f);
+        
         // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
     
-    public void circle(GL gl, float X, float Y, float Z, float m) {
-        float x,y,kat;
+    public void circle(GL gl, float Z, float m) {
+        float X, Y;
         gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(X, Y, Z);
-        for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
-        x = m*(float)Math.sin(kat);
-        y = m*(float)Math.cos(kat);
-        gl.glVertex3f(x, y, Z);
+        gl.glVertex3f(0.0f, 0.0f, Z);
+        
+        for(float kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
+            X = m*(float)Math.sin(kat);
+            Y = m*(float)Math.cos(kat);
+            
+            gl.glVertex3f(X, Y, Z);
         }
+        
         gl.glEnd();
     }
 
+    public void walec(GL gl, float m, float a, float b) {
+        float x, y;
+        gl.glBegin(GL.GL_QUAD_STRIP);
+            for(float kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {                
+                x = m*(float)Math.sin(kat);
+                y = m*(float)Math.cos(kat);
+                gl.glVertex3f(x, y, a);
+                gl.glVertex3f(x, y, b);
+            }
+        gl.glEnd();
+    }
+    
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
