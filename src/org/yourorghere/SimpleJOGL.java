@@ -185,18 +185,58 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
 
         
-        gl.glColor3f(0.0f,1.0f,0.0f);
+        gl.glColor3f(1.0f,0.0f,0.0f);
         gl.glBegin(GL.GL_TRIANGLES);
-        
-        //œciana przednia
-        float[] scianka1={-1.0f, -1.0f, 1.0f, //wpó³rzêdne pierwszego punktu
-                          1.0f, -1.0f, 1.0f,  //wspó³rzêdne drugiego punktu
-                          0.0f, 1.0f, 0.0f};  //wspó³rzêdne trzeciego punktu
-        float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
-        gl.glNormal3fv(normalna1,0);
-        gl.glVertex3fv(scianka1,0); //wspó³rzêdne 1-go punktu zaczynaj¹ siê od indeksu 0
-        gl.glVertex3fv(scianka1,3); //wspó³rzêdne 2-go punktu zaczynaj¹ siê od indeksu 3
-        gl.glVertex3fv(scianka1,6); //wspó³rzêdne 3-go punktu zaczynaj¹ siê od indeksu 6
+            //siana 1
+            float[] scianka1 = { 1.0f,-1.0f,1.0f,
+                               -1.0f,-1.0f,1.0f,
+                                0.0f,0.0f,0.0f };
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+            float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
+            gl.glNormal3fv(normalna1,0);
+            //sciana 2
+            float[] scianka2 = { 1.0f,-1.0f,-1.0f,
+                                1.0f,-1.0f,1.0f,
+                                0.0f,0.0f,0.0f };
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+            float[] normalna2 = WyznaczNormalna(scianka2,0,3,6);
+            gl.glNormal3fv(normalna2,0);
+            //siana 3
+            float[] scianka3 = { -1.0f,-1.0f,-1.0f,
+                                 1.0f,-1.0f,-1.0f,
+                                 0.0f,0.0f,0.0f };
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+            float[] normalna3 = WyznaczNormalna(scianka3,0,3,6);
+            gl.glNormal3fv(normalna3,0);
+            //siana 4
+            float[] scianka4 = { -1.0f,-1.0f,1.0f,
+                                -1.0f,-1.0f,1.0f,
+                                -1.0f,-1.0f,-1.0f };
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f,0.0f,0.0f);
+            float[] normalna4 = WyznaczNormalna(scianka4,0,3,6);
+            gl.glNormal3fv(normalna4,0);
+        gl.glEnd();
+            
+        gl.glBegin(GL.GL_QUADS);
+            //siana dolna
+         float[] scianka5 = { -1.0f,-1.0f,1.0f,
+                               -1.0f,-1.0f,-1.0f,
+                                1.0f,-1.0f,-1.0f,
+                                1.0f,-1.0f,1.0f };
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            float[] normalna5 = WyznaczNormalna(scianka5,0,3,6);
+            gl.glNormal3fv(normalna5,0);
         gl.glEnd();
 
         
@@ -210,6 +250,7 @@ public class SimpleJOGL implements GLEventListener {
         // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
+    
     private float[] WyznaczNormalna(float[] punkty, int ind1, int ind2, int ind3) {
         float[] norm = new float[3];
         float[] wektor0 = new float[3];
@@ -235,6 +276,7 @@ public class SimpleJOGL implements GLEventListener {
 
         return norm;
 }
+    
     public void circle(GL gl, float Z, float m) {
         float X, Y;
         gl.glBegin(GL.GL_TRIANGLE_FAN);
@@ -274,7 +316,6 @@ public class SimpleJOGL implements GLEventListener {
         gl.glEnd();
     }
     
-    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
-    }
+    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {}
 }
 
