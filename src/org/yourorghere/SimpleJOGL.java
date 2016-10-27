@@ -21,6 +21,12 @@ import javax.media.opengl.glu.GLU;
  */
 public class SimpleJOGL implements GLEventListener {
     
+    //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
+    static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
+    static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
+    static float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
+    static float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
+        
     //statyczne pola okreœlaj¹ce rotacjê wokó³ osi X i Y
     private static float xrot = 0.0f, yrot = 0.0f;
 
@@ -52,6 +58,36 @@ public class SimpleJOGL implements GLEventListener {
          //Obs³uga klawiszy strza³ek
          frame.addKeyListener(new KeyListener() {
              public void keyPressed(KeyEvent e) {
+                 if(e.getKeyCode() == KeyEvent.VK_A)
+                         lightPos[3] = 10.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_S)
+                         lightPos[3] = -10.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_Z)
+                         lightPos[0] += 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_X)
+                         lightPos[0] -= 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_C)
+                         lightPos[1] += 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_V)
+                         lightPos[1] -= 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_D)
+                     for (int i=0; i<=2; i++)
+                         specular[i] += 0.1f;
+                 if(e.getKeyCode() == KeyEvent.VK_F)
+                     for (int i=0; i<=2; i++)
+                         specular[i] -= 0.1f;
+                 if(e.getKeyCode() == KeyEvent.VK_Q)
+                     for (int i=0; i<=2; i++)
+                         ambientLight[i] += 0.1f;
+                 if(e.getKeyCode() == KeyEvent.VK_W)
+                     for (int i=0; i<=2; i++)
+                         ambientLight[i] -= 0.1f;
+                 if(e.getKeyCode() == KeyEvent.VK_E)
+                     for (int i=0; i<=2; i++)
+                         diffuseLight[i] += 0.1f;
+                 if(e.getKeyCode() == KeyEvent.VK_R)
+                     for (int i=0; i<=2; i++)
+                         diffuseLight[i] -= 0.1f;
                  if(e.getKeyCode() == KeyEvent.VK_UP)
                      xrot -= 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_DOWN)
@@ -83,11 +119,6 @@ public class SimpleJOGL implements GLEventListener {
         // Enable VSync
         gl.setSwapInterval(1);
 
-         //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
-        float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
-        float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
-        float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
-        float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
         //(czwarty parametr okreœla odleg³oœæ œród³a:
         //0.0f-nieskoñczona; 1.0f-okreœlona przez pozosta³e parametry)
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie oœwietlenia
@@ -145,7 +176,10 @@ public class SimpleJOGL implements GLEventListener {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
-        
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat³o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //œwiat³o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //œwiat³o odbite
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
@@ -153,8 +187,49 @@ public class SimpleJOGL implements GLEventListener {
         gl.glColor3f(0.0f,1.0f,0.0f);
         circle(gl,  2.0f, 2.0f);
         
-        gl.glColor3f(1.0f,0.0f,0.0f);
-        stozek(gl, 2.0f, 2.0f);
+
+
+        gl.glBegin(GL.GL_QUADS);
+            //?ciana przednia
+            gl.glColor3f(1.0f,0.0f,0.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(1.0f,1.0f,1.0f);
+            gl.glVertex3f(-1.0f,1.0f,1.0f);
+            //sciana tylnia
+            gl.glColor3f(0.0f,1.0f,0.0f);
+            gl.glVertex3f(-1.0f,1.0f,-1.0f);
+            gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            //?ciana lewa
+            gl.glColor3f(0.0f,0.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,1.0f,1.0f);
+            gl.glVertex3f(-1.0f,1.0f,-1.0f);
+            //?ciana prawa
+            gl.glColor3f(1.0f,1.0f,0.0f);
+            gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glVertex3f(1.0f,1.0f,1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            //?ciana dolna
+            gl.glColor3f(1.0f,0.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            //?ciana górna
+            gl.glColor3f(0.0f,1.0f,1.0f);
+            gl.glVertex3f(-1.0f,1.0f,1.0f);
+            gl.glVertex3f(-1.0f,1.0f,-1.0f);
+            gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glVertex3f(1.0f,1.0f,1.0f);
+        gl.glEnd();
+        
+        //gl.glColor3f(1.0f,0.0f,0.0f);
+        //stozek(gl, 2.0f, 2.0f);
         
         //walec(gl, 2.0f, 2.0f, -2.0f);
         
