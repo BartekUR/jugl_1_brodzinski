@@ -239,8 +239,22 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glNormal3fv(normalna5,0);
 //        gl.glEnd();
 
-        drzewo(gl);
-
+        gl.glTranslatef(-10.0f, 0.0f, 0.0f);
+        
+        gl.glPushMatrix();
+        
+        for (int i=0; i<4; i++) {
+            gl.glTranslatef(4.5f, 0.0f, 0.0f);
+            drzewo(gl);
+        }
+        
+        gl.glPopMatrix();
+        gl.glTranslatef(0.0f, 4.0f, 0.0f);
+        
+        for (int i=0; i<4; i++) {
+            gl.glTranslatef(4.2f, 0.0f, 0.0f);
+            drzewo(gl);
+        }
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
@@ -273,19 +287,25 @@ public class SimpleJOGL implements GLEventListener {
     }
     
     void drzewo(GL gl) {
-        gl.glColor3f(0.0f,1.0f,0.0f);
+        gl.glPushMatrix();
+        
+        gl.glColor3f(0.4f,0.9f,0.5f);
         stozek(gl);
-        gl.glScalef(1.5f, 1.5f, 1.0f);
+        
+        gl.glScalef(1.1f, 1.1f, 0.9f);
         gl.glTranslatef(0.0f, 0.0f, 1.2f);
         stozek(gl);
+        
         gl.glScalef(1.6f, 1.8f, 1.0f);
         gl.glTranslatef(0.0f, 0.0f, 1.2f);
         stozek(gl);
-        gl.glTranslatef(0.0f, 0.0f, 1.0f);
         
-        gl.glColor3f(1.0f,0.0f,0.0f);
-        gl.glScalef(0.3f, 0.3f, 1.0f);
+        gl.glColor3f(1.0f,0.0f,0.0f);        
+        gl.glTranslatef(0.0f, 0.0f, 1.5f);
+        gl.glScalef(1.0f, 1.0f, 1.5f);
         walec(gl);
+        
+        gl.glPopMatrix();
     }
     
     void walec(GL gl) {
