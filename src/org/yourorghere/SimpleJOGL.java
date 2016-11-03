@@ -185,67 +185,62 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
 
         
-        gl.glColor3f(1.0f,0.0f,0.0f);
-        gl.glBegin(GL.GL_TRIANGLES);
-            //siana 1
-            float[] scianka1 = { 1.0f,-1.0f,1.0f,
-                               -1.0f,-1.0f,1.0f,
-                                0.0f,0.0f,0.0f };
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
-            gl.glNormal3fv(normalna1,0);
-            //sciana 2
-            float[] scianka2 = { 1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,1.0f,
-                                0.0f,0.0f,0.0f };
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna2 = WyznaczNormalna(scianka2,0,3,6);
-            gl.glNormal3fv(normalna2,0);
-            //siana 3
-            float[] scianka3 = { -1.0f,-1.0f,-1.0f,
-                                 1.0f,-1.0f,-1.0f,
-                                 0.0f,0.0f,0.0f };
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna3 = WyznaczNormalna(scianka3,0,3,6);
-            gl.glNormal3fv(normalna3,0);
-            //siana 4
-            float[] scianka4 = { -1.0f,-1.0f,1.0f,
-                                -1.0f,-1.0f,1.0f,
-                                -1.0f,-1.0f,-1.0f };
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna4 = WyznaczNormalna(scianka4,0,3,6);
-            gl.glNormal3fv(normalna4,0);
-        gl.glEnd();
-            
-        gl.glBegin(GL.GL_QUADS);
-            //siana dolna
-         float[] scianka5 = { -1.0f,-1.0f,1.0f,
-                               -1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,1.0f };
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            float[] normalna5 = WyznaczNormalna(scianka5,0,3,6);
-            gl.glNormal3fv(normalna5,0);
-        gl.glEnd();
+//        gl.glColor3f(1.0f,0.0f,0.0f);
+//        gl.glBegin(GL.GL_TRIANGLES);
+//            //siana 1
+//            float[] scianka1 = { 1.0f,-1.0f,1.0f,
+//                               -1.0f,-1.0f,1.0f,
+//                                0.0f,0.0f,0.0f };
+//            gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
+//            gl.glNormal3fv(normalna1,0);
+//            //sciana 2
+//            float[] scianka2 = { 1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,1.0f,
+//                                0.0f,0.0f,0.0f };
+//            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna2 = WyznaczNormalna(scianka2,0,3,6);
+//            gl.glNormal3fv(normalna2,0);
+//            //siana 3
+//            float[] scianka3 = { -1.0f,-1.0f,-1.0f,
+//                                 1.0f,-1.0f,-1.0f,
+//                                 0.0f,0.0f,0.0f };
+//            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna3 = WyznaczNormalna(scianka3,0,3,6);
+//            gl.glNormal3fv(normalna3,0);
+//            //siana 4
+//            float[] scianka4 = { -1.0f,-1.0f,1.0f,
+//                                -1.0f,-1.0f,1.0f,
+//                                -1.0f,-1.0f,-1.0f };
+//            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna4 = WyznaczNormalna(scianka4,0,3,6);
+//            gl.glNormal3fv(normalna4,0);
+//        gl.glEnd();
+//            
+//        gl.glBegin(GL.GL_QUADS);
+//            //siana dolna
+//         float[] scianka5 = { -1.0f,-1.0f,1.0f,
+//                               -1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,1.0f };
+//            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            float[] normalna5 = WyznaczNormalna(scianka5,0,3,6);
+//            gl.glNormal3fv(normalna5,0);
+//        gl.glEnd();
 
-        
-        // circle(gl,  2.0f, 2.0f);
-        
-        //gl.glColor3f(1.0f,0.0f,0.0f);
-        //stozek(gl, 2.0f, 2.0f);
-        
-        //walec(gl, 2.0f, 2.0f, -2.0f);
+        drzewo(gl);
+
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
@@ -275,7 +270,91 @@ public class SimpleJOGL implements GLEventListener {
         norm[2]/=d;
 
         return norm;
-}
+    }
+    
+    void drzewo(GL gl) {
+        gl.glColor3f(0.0f,1.0f,0.0f);
+        stozek(gl);
+        gl.glScalef(1.5f, 1.5f, 1.0f);
+        gl.glTranslatef(0.0f, 0.0f, 1.2f);
+        stozek(gl);
+        gl.glScalef(1.6f, 1.8f, 1.0f);
+        gl.glTranslatef(0.0f, 0.0f, 1.2f);
+        stozek(gl);
+        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        
+        gl.glColor3f(1.0f,0.0f,0.0f);
+        gl.glScalef(0.3f, 0.3f, 1.0f);
+        walec(gl);
+    }
+    
+    void walec(GL gl) {
+        //wywo³ujemy automatyczne normalizowanie normalnych
+        //bo operacja skalowania je zniekszta³ci
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x,y,kat;
+        
+        gl.glBegin(GL.GL_QUAD_STRIP);
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glNormal3f((float)Math.sin(kat),(float)Math.cos(kat),0.0f);
+            gl.glVertex3f(x, y, -1.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        
+        gl.glNormal3f(0.0f,0.0f,-1.0f);
+        x=y=kat=0.0f;
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f);
+        }
+        gl.glEnd();
+        
+        gl.glNormal3f(0.0f,0.0f,1.0f);
+        x=y=kat=0.0f;
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for(kat = 2.0f*(float)Math.PI; kat > 0.0f ; kat -= (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+    }
+
+    void stozek(GL gl) {
+        //wywo³ujemy automatyczne normalizowanie normalnych
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x,y,kat;
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -2.0f); //wierzcholek stozka
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
+            x = (float)Math.sin(kat);
+            y = (float)Math.cos(kat);
+            gl.glNormal3f((float)Math.sin(kat),(float)Math.cos(kat),-2.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glNormal3f(0.0f,0.0f,1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for(kat = 2.0f*(float)Math.PI; kat > 0.0f; kat -= (Math.PI/32.0f)) {
+            x = (float)Math.sin(kat);
+            y = (float)Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+    }
+
     
     public void circle(GL gl, float Z, float m) {
         float X, Y;
@@ -289,30 +368,6 @@ public class SimpleJOGL implements GLEventListener {
             gl.glVertex3f(X, Y, Z);
         }
         
-        gl.glEnd();
-    }
-
-    public void walec(GL gl, float m, float a, float b) {
-        float x, y;
-        gl.glBegin(GL.GL_QUAD_STRIP);
-            for(float kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {                
-                x = m*(float)Math.sin(kat);
-                y = m*(float)Math.cos(kat);
-                gl.glVertex3f(x, y, a);
-                gl.glVertex3f(x, y, b);
-            }
-        gl.glEnd();
-    }
-    
-    public void stozek(GL gl, float m, float a) {
-        float x, y;
-        gl.glBegin(GL.GL_QUAD_STRIP);
-            for(float kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {                
-                x = m*(float)Math.sin(kat);
-                y = m*(float)Math.cos(kat);
-                gl.glVertex3f(x, y, a);
-                gl.glVertex3f(0.0f, 1.0f, 0.0f);
-            }
         gl.glEnd();
     }
     
