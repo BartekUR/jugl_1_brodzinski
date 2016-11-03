@@ -163,8 +163,19 @@ public class SimpleJOGL implements GLEventListener {
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        // glu.gluPerspective(45.0f, h, 1.0, 20.0);
-        glu.gluPerspective(100.0f, h, 1.0, 20.0);
+        
+        //glu.gluPerspective(1000.0f, h, 1.0, 20.0);
+        
+        float ilor;
+        if (width<=height) {
+            ilor = height/width;
+            gl.glOrtho(-10.0f,10.0f,-10.0f*ilor,10.0f*ilor,-10.0f,10.0f);
+        }
+        else {
+            ilor = width/height;
+            gl.glOrtho(-10.0f*ilor,10.0f*ilor,-10.0f,10.0f,-10.0f,10.0f);
+        }
+        
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
@@ -239,22 +250,21 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glNormal3fv(normalna5,0);
 //        gl.glEnd();
 
-        gl.glTranslatef(-10.0f, 0.0f, 0.0f);
+        gl.glTranslatef(-11.0f, -6.0f, 0.0f);
         
         gl.glPushMatrix();
-        
         for (int i=0; i<4; i++) {
-            gl.glTranslatef(4.5f, 0.0f, 0.0f);
-            drzewo(gl);
+            
+            gl.glPushMatrix();
+            for (int j=0; j<4; j++) {
+                gl.glTranslatef(4.5f, 0.0f, 0.0f);
+                drzewo(gl);
+            }
+            gl.glPopMatrix();
+            
+            gl.glTranslatef(0.0f, 4.0f, 0.0f);
         }
-        
         gl.glPopMatrix();
-        gl.glTranslatef(0.0f, 4.0f, 0.0f);
-        
-        for (int i=0; i<4; i++) {
-            gl.glTranslatef(4.2f, 0.0f, 0.0f);
-            drzewo(gl);
-        }
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
