@@ -26,6 +26,7 @@ public class SimpleJOGL implements GLEventListener {
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
     static float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
     static float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
+    static float lightPos1[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
         
     //statyczne pola okreœlaj¹ce rotacjê wokó³ osi X i Y
     private static float xrot = 0.0f, yrot = 0.0f;
@@ -66,6 +67,10 @@ public class SimpleJOGL implements GLEventListener {
                          lightPos[0] += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_X)
                          lightPos[0] -= 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_M)
+                         lightPos1[0] += 1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_N)
+                         lightPos1[0] -= 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_C)
                          lightPos[1] += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_V)
@@ -128,6 +133,13 @@ public class SimpleJOGL implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //œwiat³o odbite
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
         gl.glEnable(GL.GL_LIGHT0); //uaktywnienie Ÿród³a œwiat³a nr. 0
+            lightPos1[3] = -10.0f;
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_AMBIENT,ambientLight,0); //swiat³o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_DIFFUSE,diffuseLight,0); //œwiat³o rozproszone
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,0); //œwiat³o odbite
+
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos1,0); //pozycja ?wiat³a
+        gl.glEnable(GL.GL_LIGHT1); //uaktywnienie Ÿród³a œwiat³a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie œledzenia kolorów
         //kolory bêd¹ ustalane za pomoc¹ glColor
         gl.glColorMaterial(GL.GL_FRONT, GL.GL_AMBIENT_AND_DIFFUSE);
@@ -164,17 +176,17 @@ public class SimpleJOGL implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         
-        glu.gluPerspective(170.0f, h, 1.0, 20.0);
+//        glu.gluPerspective(90.0f, h, 1.0, 20.0);
         
-//        float ilor;
-//        if (width<=height) {
-//            ilor = height/width;
-//            gl.glOrtho(-20.0f,20.0f,-20.0f*ilor,20.0f*ilor,-20.0f,20.0f);
-//        }
-//        else {
-//            ilor = width/height;
-//            gl.glOrtho(-20.0f*ilor,20.0f*ilor,-20.0f,20.0f,-20.0f,20.0f);
-//        }
+        float ilor;
+        if (width<=height) {
+            ilor = height/width;
+            gl.glOrtho(-20.0f,20.0f,-20.0f*ilor,20.0f*ilor,-20.0f,20.0f);
+        }
+        else {
+            ilor = width/height;
+            gl.glOrtho(-20.0f*ilor,20.0f*ilor,-20.0f,20.0f,-20.0f,20.0f);
+        }
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -302,7 +314,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glColor3f(0.4f,0.9f,0.5f);
         stozek(gl);
         
-        gl.glScalef(1.1f, 1.1f, 0.9f);
+        gl.glScalef(1.4f, 1.4f, 0.9f);
         gl.glTranslatef(0.0f, 0.0f, 1.2f);
         stozek(gl);
         
@@ -310,9 +322,9 @@ public class SimpleJOGL implements GLEventListener {
         gl.glTranslatef(0.0f, 0.0f, 1.2f);
         stozek(gl);
         
-        gl.glColor3f(1.0f,0.0f,0.0f);        
-        gl.glTranslatef(0.0f, 0.0f, 1.5f);
-        gl.glScalef(1.0f, 1.0f, 1.5f);
+        gl.glColor3f(0.55f,0.27f,0.08f);        
+        gl.glTranslatef(0.0f, 0.0f, 2.0f);
+        gl.glScalef(0.5f, 0.5f, 2.0f);
         walec(gl);
         
         gl.glPopMatrix();
