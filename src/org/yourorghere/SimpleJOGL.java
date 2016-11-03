@@ -160,7 +160,7 @@ public class SimpleJOGL implements GLEventListener {
             height = 1;
         }
         final float h = (float) width / (float) height;
-        gl.glViewport(0, 0, width, height);
+        gl.glViewport(0, 0, width/4, height/4);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         
@@ -169,11 +169,11 @@ public class SimpleJOGL implements GLEventListener {
         float ilor;
         if (width<=height) {
             ilor = height/width;
-            gl.glOrtho(-10.0f,10.0f,-10.0f*ilor,10.0f*ilor,-10.0f,10.0f);
+            gl.glOrtho(-20.0f,20.0f,-20.0f*ilor,20.0f*ilor,-20.0f,20.0f);
         }
         else {
             ilor = width/height;
-            gl.glOrtho(-10.0f*ilor,10.0f*ilor,-10.0f,10.0f,-10.0f,10.0f);
+            gl.glOrtho(-20.0f*ilor,20.0f*ilor,-20.0f,20.0f,-20.0f,20.0f);
         }
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
@@ -250,13 +250,13 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glNormal3fv(normalna5,0);
 //        gl.glEnd();
 
-        gl.glTranslatef(-11.0f, -6.0f, 0.0f);
+        gl.glTranslatef(-22.0f, -12.0f, 0.0f);
         
         gl.glPushMatrix();
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<8; i++) {
             
             gl.glPushMatrix();
-            for (int j=0; j<4; j++) {
+            for (int j=0; j<8; j++) {
                 gl.glTranslatef(4.5f, 0.0f, 0.0f);
                 drzewo(gl);
             }
