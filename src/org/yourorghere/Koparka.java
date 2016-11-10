@@ -2,12 +2,13 @@ package org.yourorghere;
 
 import javax.media.opengl.GL;
 
-import static org.yourorghere.SimpleJOGL.koparka_lyzka;
-import static org.yourorghere.SimpleJOGL.koparka_ram1;
-import static org.yourorghere.SimpleJOGL.koparka_ram2;
-
 public class Koparka {
-
+    public static float koparka_ram1 = 45.0f;
+    public static float koparka_ram2 = -45.0f;
+    public static float koparka_lyzka = -45.0f;
+    public static float obrot = -45.0f;
+    public static boolean rysuj = false;
+    
     public void Rysuj(GL gl) {
         //ciagnik
         gl.glColor3f(1.0f,1.0f,0.0f);
@@ -36,6 +37,19 @@ public class Koparka {
         gl.glTranslatef(1.2f,0.1f,0.0f);
         gl.glRotatef(koparka_lyzka,0.0f,0.0f,1.0f);
         Lyzka(gl);
+        
+        int fr = 0;
+        if (rysuj) {
+            if (fr > 100 && fr < 200) {
+                Rys(0);
+            }
+           if (fr > 200 && fr < 300) {
+               Rys(1);
+           }
+            System.out.println(fr);
+            fr++;
+        }
+        
     }
     
     private void Prostopadloscian(GL gl, float x0, float y0, float z0, float dx, float dy, float dz) {
@@ -145,4 +159,30 @@ public class Koparka {
         gl.glEnd();
         gl.glEnable(GL.GL_CULL_FACE);
     }
+    
+    public void Rys(int e) {
+        if (e == 0)
+            if (koparka_ram1 < 60.0f)
+                koparka_ram1+=1.0f;
+        if (e == 1)
+            if (koparka_ram1 > -10.0f)
+                koparka_ram1-=1.0f;
+        if (e == 2)
+            if (koparka_ram2 < 0.0f)
+                koparka_ram2+=1.0f;
+        if (e == 3)
+            if (koparka_ram2 > -90.0f)
+                koparka_ram2-=1.0f;
+        if (e == 4)
+            if (koparka_lyzka < 0.0f)
+                koparka_lyzka+=1.0f;
+        if (e == 5)
+            if (koparka_lyzka > -90.0f)
+                koparka_lyzka-=1.0f;
+    }
+    
+    public void animToggle() {
+        rysuj = !rysuj;
+    }
+    
 }
