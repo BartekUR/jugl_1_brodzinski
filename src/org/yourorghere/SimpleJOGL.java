@@ -22,6 +22,10 @@ import javax.media.opengl.glu.GLU;
 public class SimpleJOGL implements GLEventListener {
     
     static Koparka koparka;
+    
+    public static float koparka_ram1 = 45.0f;
+    public static float koparka_ram2 = -45.0f;
+    public static float lyzka = -45.0f;
     //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
@@ -102,6 +106,22 @@ public class SimpleJOGL implements GLEventListener {
                      yrot += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_LEFT)
                      yrot -=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_1)
+                     koparka_ram1+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_2)
+                     koparka_ram1-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_3)
+                     koparka_ram2+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_4)
+                     koparka_ram2-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_5)
+                     lyzka+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_6)
+                     lyzka-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_7)
+                     lyzka+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_8)
+                     lyzka-=1.0f;
              }
          
              public void keyReleased(KeyEvent e){}
@@ -292,7 +312,7 @@ public class SimpleJOGL implements GLEventListener {
     
     public class Koparka {
 
- public void Rysuj(GL gl) {
+     public void Rysuj(GL gl) {
     //ciagnik
     gl.glColor3f(1.0f,1.0f,0.0f);
     Prostopadloscian(gl,-2.0f,-1.0f,-1.0f,4.0f,1.0f,2.0f);
@@ -310,15 +330,15 @@ public class SimpleJOGL implements GLEventListener {
     Prostopadloscian(gl,-0.5f,1.5f,-1.0f,2.0f,0.1f,2.0f);
     //ramie 1
     gl.glTranslatef(1.5f,0.0f,0.0f);
-    gl.glRotatef(45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(koparka_ram1,0.0f,0.0f,1.0f);
     Prostopadloscian(gl,0.0f,0.0f,0.0f,3.0f,0.3f,0.3f);
     //ramie 2
     gl.glTranslatef(2.7f,0.0f,0.0f);
-    gl.glRotatef(-45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(koparka_ram2,0.0f,0.0f,1.0f);
     Prostopadloscian(gl,0.0f,0.0f,0.0f,1.5f,0.3f,0.3f);
     //lyzka
     gl.glTranslatef(1.2f,0.1f,0.0f);
-    gl.glRotatef(-45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(lyzka,0.0f,0.0f,1.0f);
     Lyzka(gl);
 } 
 private void Prostopadloscian(GL gl, float x0, float y0, float z0, float dx, float dy, float dz) {
