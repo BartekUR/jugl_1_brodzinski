@@ -266,64 +266,64 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
         gl.glScalef(2.5f, 2.5f, 2.5f);
         
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
-        gl.glColor3f(1.0f,0.0f,0.0f);
-        gl.glBegin(GL.GL_TRIANGLES);
-            //siana 1
-            float[] scianka1 = { 1.0f,-1.0f,1.0f,
-                               -1.0f,-1.0f,1.0f,
-                                0.0f,0.0f,0.0f };
-            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
-            gl.glNormal3fv(normalna1,0);
-            //siana 3
-            float[] scianka3 = { -1.0f,-1.0f,-1.0f,
-                                 1.0f,-1.0f,-1.0f,
-                                 0.0f,0.0f,0.0f };
-            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna3 = WyznaczNormalna(scianka3,0,3,6);
-            gl.glNormal3fv(normalna3,0);
-        gl.glEnd();
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        gl.glBegin(GL.GL_TRIANGLES);
-            //sciana 2
-            float[] scianka2 = { 1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,1.0f,
-                                0.0f,0.0f,0.0f };
-            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna2 = WyznaczNormalna(scianka2,0,3,6);
-            gl.glNormal3fv(normalna2,0);
- 
-            //siana 4
-            float[] scianka4 = { -1.0f,-1.0f,1.0f,
-                                -1.0f,-1.0f,1.0f,
-                                -1.0f,-1.0f,-1.0f };
-            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
-            float[] normalna4 = WyznaczNormalna(scianka4,0,3,6);
-            gl.glNormal3fv(normalna4,0);
-        gl.glEnd();
-            
-        gl.glBegin(GL.GL_QUADS);
-            //siana dolna
-         float[] scianka5 = { -1.0f,-1.0f,1.0f,
-                               -1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,-1.0f,
-                                1.0f,-1.0f,1.0f };
-            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-            float[] normalna5 = WyznaczNormalna(scianka5,0,3,6);
-            gl.glNormal3fv(normalna5,0);
-        gl.glEnd();
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+//        gl.glColor3f(1.0f,0.0f,0.0f);
+//        gl.glBegin(GL.GL_TRIANGLES);
+//            //siana 1
+//            float[] scianka1 = { 1.0f,-1.0f,1.0f,
+//                               -1.0f,-1.0f,1.0f,
+//                                0.0f,0.0f,0.0f };
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna1 = WyznaczNormalna(scianka1,0,3,6);
+//            gl.glNormal3fv(normalna1,0);
+//            //siana 3
+//            float[] scianka3 = { -1.0f,-1.0f,-1.0f,
+//                                 1.0f,-1.0f,-1.0f,
+//                                 0.0f,0.0f,0.0f };
+//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna3 = WyznaczNormalna(scianka3,0,3,6);
+//            gl.glNormal3fv(normalna3,0);
+//        gl.glEnd();
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        gl.glBegin(GL.GL_TRIANGLES);
+//            //sciana 2
+//            float[] scianka2 = { 1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,1.0f,
+//                                0.0f,0.0f,0.0f };
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna2 = WyznaczNormalna(scianka2,0,3,6);
+//            gl.glNormal3fv(normalna2,0);
+// 
+//            //siana 4
+//            float[] scianka4 = { -1.0f,-1.0f,1.0f,
+//                                -1.0f,-1.0f,1.0f,
+//                                -1.0f,-1.0f,-1.0f };
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(-1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(0.0f,0.0f,0.0f);
+//            float[] normalna4 = WyznaczNormalna(scianka4,0,3,6);
+//            gl.glNormal3fv(normalna4,0);
+//        gl.glEnd();
+//            
+//        gl.glBegin(GL.GL_QUADS);
+//            //siana dolna
+//         float[] scianka5 = { -1.0f,-1.0f,1.0f,
+//                               -1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,-1.0f,
+//                                1.0f,-1.0f,1.0f };
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            float[] normalna5 = WyznaczNormalna(scianka5,0,3,6);
+//            gl.glNormal3fv(normalna5,0);
+//        gl.glEnd();
 
 //       gl.glTranslatef(-22.0f, -12.0f, 0.0f);
 //        
@@ -354,39 +354,78 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
 //
 //            gl.glColor3f(0.0f,1.0f,0.0f);
-//            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
 //
 //            gl.glColor3f(0.0f,0.0f,1.0f);
-//            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,1.0f);
-//            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(-1.0f,1.0f,1.0f);
-//            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
 //        gl.glEnd();
 //            //?ciana prawa
 //        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
 //        gl.glBegin(GL.GL_QUADS);
 //            gl.glColor3f(1.0f,1.0f,0.0f);
 //            gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
-//            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,1.0f);
-//            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,1.0f);
-//            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
 //
 //            gl.glColor3f(1.0f,0.0f,1.0f);
-//            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,1.0f);
-//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
 //
 //            gl.glColor3f(0.0f,1.0f,1.0f);
-//            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,1.0f);
-//            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
-//            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,1.0f,1.0f);
+//            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+//            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+//            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
 //        gl.glEnd();
+        
+        // walec
+        gl.glColor3f(1.0f,0.0f,0.0f);
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x,y,kat;
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUAD_STRIP);
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glNormal3f((float)Math.sin(kat),(float)Math.cos(kat),0.0f);
+            gl.glTexCoord2f(0.0f, x); gl.glVertex3f(x, y, -1.0f);
+            gl.glTexCoord2f(1.0f, x); gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glColor3f(0.0f,0.0f,1.0f);
+        gl.glNormal3f(0.0f,0.0f,-1.0f);
+        x=y=kat=0.0f;
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f);
+        }
+        gl.glEnd();
+        
+        gl.glNormal3f(0.0f,0.0f,1.0f);
+        x=y=kat=0.0f;
+        
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for(kat = 2.0f*(float)Math.PI; kat > 0.0f ; kat -= (Math.PI/32.0f)) {
+            x = 0.5f*(float)Math.sin(kat);
+            y = 0.5f*(float)Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
