@@ -10,7 +10,12 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
-
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -21,12 +26,15 @@ import javax.media.opengl.glu.GLU;
  */
 public class SimpleJOGL implements GLEventListener {
     
-    static Koparka koparka;
+//    static Koparka koparka;
+
+    static BufferedImage image1 = null,image2 = null;
+    static Texture t1 = null, t2 = null;
     
-    public static float koparka_ram1 = 45.0f;
-    public static float koparka_ram2 = -45.0f;
-    public static float koparka_lyzka = -45.0f;
-    public static float obrot = -45.0f;
+//    public static float koparka_ram1 = 45.0f;
+//    public static float koparka_ram2 = -45.0f;
+//    public static float koparka_lyzka = -45.0f;
+//    public static float obrot = -45.0f;
     //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
@@ -107,28 +115,28 @@ public class SimpleJOGL implements GLEventListener {
                      yrot += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_LEFT)
                      yrot -=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_1)
-                     if (koparka_ram1 < 60.0f)
-                         koparka_ram1+=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_2)
-                     if (koparka_ram1 > -10.0f)
-                         koparka_ram1-=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_3)
-                     if (koparka_ram2 < 0.0f)
-                         koparka_ram2+=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_4)
-                     if (koparka_ram2 > -90.0f)
-                         koparka_ram2-=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_5)
-                     if (koparka_lyzka < 0.0f)
-                         koparka_lyzka+=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_6)
-                     if (koparka_lyzka > -90.0f)
-                         koparka_lyzka-=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_7)
-                     obrot+=1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_8)
-                     obrot+=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_1)
+//                     if (koparka_ram1 < 60.0f)
+//                         koparka_ram1+=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_2)
+//                     if (koparka_ram1 > -10.0f)
+//                         koparka_ram1-=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_3)
+//                     if (koparka_ram2 < 0.0f)
+//                         koparka_ram2+=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_4)
+//                     if (koparka_ram2 > -90.0f)
+//                         koparka_ram2-=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_5)
+//                     if (koparka_lyzka < 0.0f)
+//                         koparka_lyzka+=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_6)
+//                     if (koparka_lyzka > -90.0f)
+//                         koparka_lyzka-=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_7)
+//                     obrot+=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_8)
+//                     obrot+=1.0f;
              }
          
              public void keyReleased(KeyEvent e){}
@@ -189,7 +197,26 @@ public class SimpleJOGL implements GLEventListener {
          //wy³¹czenie wewnêtrzych stron prymitywów
          // gl.glEnable(GL.GL_CULL_FACE);
         
-        koparka = new Koparka();
+        try {
+            image1 = ImageIO.read(getClass().getResourceAsStream("/pokemon.jpg"));
+            image2 = ImageIO.read(getClass().getResourceAsStream("/android.jpg"));
+        }
+            catch(Exception exc) {
+            JOptionPane.showMessageDialog(null, exc.toString());
+        return;
+        }
+
+         t1 = TextureIO.newTexture(image1, false);
+         t2 = TextureIO.newTexture(image2, false);
+
+         gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_BLEND | GL.GL_MODULATE);
+         gl.glEnable(GL.GL_TEXTURE_2D);
+         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
+         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
+         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
+        
+//        koparka = new Koparka();
         
     }
 
@@ -310,8 +337,51 @@ public class SimpleJOGL implements GLEventListener {
 //        gl.glPopMatrix();
 //        
 //        gl.glScalef(4.0f, 4.0f, 4.0f);
-        koparka.Rysuj(gl);
+//        koparka.Rysuj(gl);
+        gl.glScalef(2.5f, 2.5f, 2.5f);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
+            //?ciana przednia
+            gl.glColor3f(1.0f,0.0f,0.0f);
+            gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
 
+            gl.glColor3f(0.0f,1.0f,0.0f);
+            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+
+            gl.glColor3f(0.0f,0.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(-1.0f,1.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
+        gl.glEnd();
+            //?ciana prawa
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
+            gl.glColor3f(1.0f,1.0f,0.0f);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(1.0f,1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
+
+            gl.glColor3f(1.0f,0.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,-1.0f,1.0f);
+
+            gl.glColor3f(0.0f,1.0f,1.0f);
+            gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,1.0f);
+            gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-1.0f,1.0f,-1.0f);
+            gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(1.0f,1.0f,-1.0f);
+            gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(1.0f,1.0f,1.0f);
+        gl.glEnd();
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
