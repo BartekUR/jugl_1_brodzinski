@@ -70,8 +70,11 @@ public class Scena {
     }
     
     public void przesun(float d) {
-        x-=d*Math.sin(kat*(3.14f/180.0f));
-        z+=d*Math.cos(kat*(3.14f/180.0f));
+        if ((x < 90 || x+d < 90) && (x > -90 || x+d > -90))
+            x-=d*Math.sin(kat*(3.14f/180.0f));
+        if ((z < 90 || z+d < 90) && (z > -90 || z+d > -90))
+            z+=d*Math.cos(kat*(3.14f/180.0f));
+        System.out.println("x: " + x + " z: " + z);
     }
 
     public void obroc(float d) {
