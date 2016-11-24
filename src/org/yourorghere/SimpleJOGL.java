@@ -25,16 +25,16 @@ import javax.swing.JOptionPane;
  */
 public class SimpleJOGL implements GLEventListener {
     
-//    static Koparka koparka;
+    static Koparka koparka;
     static Scena scena;
 
     static BufferedImage image1 = null,image2 = null, image3=null;
     static Texture t1 = null, t2 = null, t3 = null;
     
-//    public static float koparka_ram1 = 45.0f;
-//    public static float koparka_ram2 = -45.0f;
-//    public static float koparka_lyzka = -45.0f;
-//    public static float obrot = -45.0f;
+    public static float koparka_ram1 = 45.0f;
+    public static float koparka_ram2 = -45.0f;
+    public static float koparka_lyzka = -45.0f;
+    public static float obrot = -45.0f;
     //warto?ci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//œwiat³o rozproszone
@@ -43,7 +43,7 @@ public class SimpleJOGL implements GLEventListener {
     static float lightPos1[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja œwiat³a
         
     //statyczne pola okreœlaj¹ce rotacjê wokó³ osi X i Y
-    private static float xrot = 0.0f, yrot = 0.0f;
+    private static float xrot = 0.0f, yrot = 0.0f, kx, kkat;
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -93,13 +93,13 @@ public class SimpleJOGL implements GLEventListener {
                          lightPos1[0] += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_N)
                          lightPos1[0] -= 1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_C)
-                         lightPos[1] += 1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_V)
-                         lightPos[1] -= 1.0f;
-                 if(e.getKeyCode() == KeyEvent.VK_D)
-                     for (int i=0; i<=2; i++)
-                         specular[i] += 0.1f;
+//                 if(e.getKeyCode() == KeyEvent.VK_C)
+//                         lightPos[1] += 1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_V)
+//                         lightPos[1] -= 1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_D)
+//                     for (int i=0; i<=2; i++)
+//                         specular[i] += 0.1f;
                  if(e.getKeyCode() == KeyEvent.VK_F)
                      for (int i=0; i<=2; i++)
                          specular[i] -= 0.1f;
@@ -115,26 +115,34 @@ public class SimpleJOGL implements GLEventListener {
                  if(e.getKeyCode() == KeyEvent.VK_R)
                      for (int i=0; i<=2; i++)
                          diffuseLight[i] -= 0.1f;
+//                 if(e.getKeyCode() == KeyEvent.VK_UP)
+//                     xrot -= 1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_DOWN)
+//                     xrot +=1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+//                     yrot += 1.0f;
+//                 if(e.getKeyCode() == KeyEvent.VK_LEFT)
+//                     yrot -=1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_UP)
-                     xrot -= 1.0f;
+                     kx -= 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                     xrot +=1.0f;
+                     kx +=1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-                     yrot += 1.0f;
+                     kkat += 1.0f;
                  if(e.getKeyCode() == KeyEvent.VK_LEFT)
-                     yrot -=1.0f;
-//                 if(e.getKeyCode() == KeyEvent.VK_1)
-//                     if (koparka_ram1 < 60.0f)
-//                         koparka_ram1+=1.0f;
-//                 if(e.getKeyCode() == KeyEvent.VK_2)
-//                     if (koparka_ram1 > -10.0f)
-//                         koparka_ram1-=1.0f;
-//                 if(e.getKeyCode() == KeyEvent.VK_3)
-//                     if (koparka_ram2 < 0.0f)
-//                         koparka_ram2+=1.0f;
-//                 if(e.getKeyCode() == KeyEvent.VK_4)
-//                     if (koparka_ram2 > -90.0f)
-//                         koparka_ram2-=1.0f;
+                     kkat -=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_V)
+                     if (koparka_ram1 < 60.0f)
+                         koparka_ram1+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_B)
+                     if (koparka_ram1 > -10.0f)
+                         koparka_ram1-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_N)
+                     if (koparka_ram2 < 0.0f)
+                         koparka_ram2+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_M)
+                     if (koparka_ram2 > -90.0f)
+                         koparka_ram2-=1.0f;
 //                 if(e.getKeyCode() == KeyEvent.VK_5)
 //                     if (koparka_lyzka < 0.0f)
 //                         koparka_lyzka+=1.0f;
@@ -226,7 +234,7 @@ public class SimpleJOGL implements GLEventListener {
          gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
          gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
         
-//        koparka = new Koparka();
+        koparka = new Koparka();
          scena = new Scena();
         
     }
@@ -276,7 +284,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
         gl.glRotatef(scena.kat, 0.0f, 1.0f, 0.0f);
         // gl.glScalef(3.0f, 3.0f, 3.0f);
-        gl.glTranslatef(0.0f,90.0f,0.0f);
+        gl.glTranslatef(0.0f,99.0f,0.0f);
 
         
 //        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
@@ -400,8 +408,14 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
 //            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
 //        gl.glEnd();
-
+        
+        
         scena.Rysuj(gl, t1, t2, t3);
+        gl.glPushMatrix();
+        gl.glTranslatef(kx,-98.5f,0.0f);
+        gl.glRotatef(kkat, 0.0f, 1.0f, 0.0f);
+        koparka.Rysuj(gl);
+        gl.glPopMatrix();
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
