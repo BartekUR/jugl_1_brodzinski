@@ -4,35 +4,41 @@ import javax.media.opengl.GL;
 import com.sun.opengl.util.texture.Texture;
 
 public class Scena {
+    float x, z, kat;
+    
     void Rysuj(GL gl, Texture t1, Texture t2, Texture t3) {
+        gl.glTranslatef(x,0.0f,z);
+        // gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
+         
         //szescian
         gl.glColor3f(1.0f,1.0f,1.0f);
+
         //za³adowanie tekstury wczytanej wczeœniej z pliku krajobraz.bmp
         gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
         //œciana przednia
         gl.glNormal3f(0.0f,0.0f,-1.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-100.0f,100.0f,100.0f);
+        gl.glTexCoord2f(0.9f, 0.0f);gl.glVertex3f(-100.0f,100.0f,100.0f);
         gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(100.0f,100.0f,100.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(100.0f,-100.0f,100.0f);
-        gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-100.0f,-100.0f,100.0f);
+        gl.glTexCoord2f(0.0f, 0.9f);gl.glVertex3f(100.0f,-100.0f,100.0f);
+        gl.glTexCoord2f(0.9f, 0.9f);gl.glVertex3f(-100.0f,-100.0f,100.0f);
         //œciana tylnia
         gl.glNormal3f(0.0f,0.0f,1.0f);
-        gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-100.0f,-100.0f,-100.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(100.0f,-100.0f,-100.0f);
+        gl.glTexCoord2f(0.9f, 0.9f);gl.glVertex3f(-100.0f,-100.0f,-100.0f);
+        gl.glTexCoord2f(0.0f, 0.9f);gl.glVertex3f(100.0f,-100.0f,-100.0f);
         gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(100.0f,100.0f,-100.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-100.0f,100.0f,-100.0f);
+        gl.glTexCoord2f(0.9f, 0.0f);gl.glVertex3f(-100.0f,100.0f,-100.0f);
         //œciana lewa
         gl.glNormal3f(1.0f,0.0f,0.0f);
         gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(-100.0f,100.0f,-100.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(-100.0f,100.0f,100.0f);
-        gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(-100.0f,-100.0f,100.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(-100.0f,-100.0f,-100.0f);
+        gl.glTexCoord2f(0.9f, 0.0f);gl.glVertex3f(-100.0f,100.0f,100.0f);
+        gl.glTexCoord2f(0.9f, 0.9f);gl.glVertex3f(-100.0f,-100.0f,100.0f);
+        gl.glTexCoord2f(0.0f, 0.9f);gl.glVertex3f(-100.0f,-100.0f,-100.0f);
         //œciana prawa
         gl.glNormal3f(-1.0f,0.0f,0.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);gl.glVertex3f(100.0f,-100.0f,-100.0f);
-        gl.glTexCoord2f(1.0f, 1.0f);gl.glVertex3f(100.0f,-100.0f,100.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);gl.glVertex3f(100.0f,100.0f,100.0f);
+        gl.glTexCoord2f(0.0f, 0.9f);gl.glVertex3f(100.0f,-100.0f,-100.0f);
+        gl.glTexCoord2f(0.9f, 0.9f);gl.glVertex3f(100.0f,-100.0f,100.0f);
+        gl.glTexCoord2f(0.9f, 0.0f);gl.glVertex3f(100.0f,100.0f,100.0f);
         gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(100.0f,100.0f,-100.0f);
         gl.glEnd();
 
@@ -62,6 +68,14 @@ public class Scena {
         gl.glTexCoord2f(0.0f, 0.0f);gl.glVertex3f(100.0f,100.0f,100.0f);
         gl.glEnd();
     }
+    
+    public void przesun(float d) {
+        x-=d*Math.sin(kat*(3.14f/180.0f));
+        z+=d*Math.cos(kat*(3.14f/180.0f));
+    }
 
+    public void obroc(float d) {
+        kat += d;
+    }
 }
 

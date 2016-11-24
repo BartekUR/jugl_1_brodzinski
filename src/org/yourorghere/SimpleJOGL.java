@@ -73,6 +73,14 @@ public class SimpleJOGL implements GLEventListener {
          //Obs³uga klawiszy strza³ek
          frame.addKeyListener(new KeyListener() {
              public void keyPressed(KeyEvent e) {
+                 if(e.getKeyCode() == KeyEvent.VK_8)
+                         scena.przesun(2.0f);
+                 if(e.getKeyCode() == KeyEvent.VK_2)
+                         scena.przesun(-2.0f);
+                 if(e.getKeyCode() == KeyEvent.VK_4)
+                         scena.kat -= 2.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_6)
+                         scena.kat += 2.0f;
                  if(e.getKeyCode() == KeyEvent.VK_A)
                          lightPos[3] = 10.0f;
                  if(e.getKeyCode() == KeyEvent.VK_S)
@@ -199,7 +207,7 @@ public class SimpleJOGL implements GLEventListener {
         
         try {
             image1 = ImageIO.read(getClass().getResourceAsStream("/bok.jpg"));
-            image2 = ImageIO.read(getClass().getResourceAsStream("/niebo.jpg"));
+            image2 = ImageIO.read(getClass().getResourceAsStream("/trawa.jpg"));
             image3 = ImageIO.read(getClass().getResourceAsStream("/niebo.jpg"));
         }
             catch(Exception exc) {
@@ -266,8 +274,10 @@ public class SimpleJOGL implements GLEventListener {
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
+        gl.glRotatef(scena.kat, 0.0f, 1.0f, 0.0f);
         // gl.glScalef(3.0f, 3.0f, 3.0f);
         gl.glTranslatef(0.0f,90.0f,0.0f);
+
         
 //        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
 //        gl.glColor3f(1.0f,0.0f,0.0f);
