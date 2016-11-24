@@ -12,7 +12,6 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureIO;
-import java.io.File;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -27,9 +26,10 @@ import javax.swing.JOptionPane;
 public class SimpleJOGL implements GLEventListener {
     
 //    static Koparka koparka;
+    static Scena scena;
 
-    static BufferedImage image1 = null,image2 = null;
-    static Texture t1 = null, t2 = null;
+    static BufferedImage image1 = null,image2 = null, image3=null;
+    static Texture t1 = null, t2 = null, t3 = null;
     
 //    public static float koparka_ram1 = 45.0f;
 //    public static float koparka_ram2 = -45.0f;
@@ -51,7 +51,7 @@ public class SimpleJOGL implements GLEventListener {
 
         canvas.addGLEventListener(new SimpleJOGL());
         frame.add(canvas);
-        frame.setSize(640, 480);
+        frame.setSize(800, 600);
         final Animator animator = new Animator(canvas);
         frame.addWindowListener(new WindowAdapter() {
 
@@ -198,8 +198,9 @@ public class SimpleJOGL implements GLEventListener {
          // gl.glEnable(GL.GL_CULL_FACE);
         
         try {
-            image1 = ImageIO.read(getClass().getResourceAsStream("/pokemon.jpg"));
-            image2 = ImageIO.read(getClass().getResourceAsStream("/android.jpg"));
+            image1 = ImageIO.read(getClass().getResourceAsStream("/bok.jpg"));
+            image2 = ImageIO.read(getClass().getResourceAsStream("/niebo.jpg"));
+            image3 = ImageIO.read(getClass().getResourceAsStream("/niebo.jpg"));
         }
             catch(Exception exc) {
             JOptionPane.showMessageDialog(null, exc.toString());
@@ -208,6 +209,7 @@ public class SimpleJOGL implements GLEventListener {
 
          t1 = TextureIO.newTexture(image1, false);
          t2 = TextureIO.newTexture(image2, false);
+         t3 = TextureIO.newTexture(image3, false);
 
          gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_BLEND | GL.GL_MODULATE);
          gl.glEnable(GL.GL_TEXTURE_2D);
@@ -217,6 +219,7 @@ public class SimpleJOGL implements GLEventListener {
          gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
         
 //        koparka = new Koparka();
+         scena = new Scena();
         
     }
 
@@ -233,8 +236,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         
-        glu.gluPerspective(100.0f, h, 0.1f, 100.0f);
-//        glu.gluPerspective(90.0f, h, 1.0, 20.0);
+        glu.gluPerspective(90.0f, h, 0.1f, 300.0f);
         
 //        float ilor;
 //        if (width<=height) {
@@ -264,7 +266,8 @@ public class SimpleJOGL implements GLEventListener {
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
-        gl.glScalef(2.5f, 2.5f, 2.5f);
+        // gl.glScalef(3.0f, 3.0f, 3.0f);
+        gl.glTranslatef(0.0f,90.0f,0.0f);
         
 //        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
 //        gl.glColor3f(1.0f,0.0f,0.0f);
@@ -387,45 +390,8 @@ public class SimpleJOGL implements GLEventListener {
 //            gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
 //            gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
 //        gl.glEnd();
-        
-        // walec
-        gl.glColor3f(1.0f,0.0f,0.0f);
-        gl.glEnable(GL.GL_NORMALIZE);
-        float x,y,kat;
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
-        gl.glBegin(GL.GL_QUAD_STRIP);
-        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
-            x = 0.5f*(float)Math.sin(kat);
-            y = 0.5f*(float)Math.cos(kat);
-            gl.glNormal3f((float)Math.sin(kat),(float)Math.cos(kat),0.0f);
-            gl.glTexCoord2f(0.0f, x); gl.glVertex3f(x, y, -1.0f);
-            gl.glTexCoord2f(1.0f, x); gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
-        gl.glColor3f(0.0f,0.0f,1.0f);
-        gl.glNormal3f(0.0f,0.0f,-1.0f);
-        x=y=kat=0.0f;
-        
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
-        for(kat = 0.0f; kat < (2.0f*Math.PI); kat += (Math.PI/32.0f)) {
-            x = 0.5f*(float)Math.sin(kat);
-            y = 0.5f*(float)Math.cos(kat);
-            gl.glVertex3f(x, y, -1.0f);
-        }
-        gl.glEnd();
-        
-        gl.glNormal3f(0.0f,0.0f,1.0f);
-        x=y=kat=0.0f;
-        
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
-        for(kat = 2.0f*(float)Math.PI; kat > 0.0f ; kat -= (Math.PI/32.0f)) {
-            x = 0.5f*(float)Math.sin(kat);
-            y = 0.5f*(float)Math.cos(kat);
-            gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
+
+        scena.Rysuj(gl, t1, t2, t3);
         
         // Flush all drawing operations to the graphics card
         gl.glFlush();
